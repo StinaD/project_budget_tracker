@@ -16,16 +16,16 @@ CREATE TABLE tags (
 CREATE TABLE transactions (
   id SERIAL8 primary key,
   transaction_type VARCHAR(120),
-  amount INT2,
+  amount NUMERIC,
   transaction_date DATE,
-  tag_id INT8 REFERENCES tags(id),
-  merchant_id INT8 REFERENCES merchants(id)
+  merchant_id INT8 REFERENCES merchants(id) ON DELETE CASCADE,
+  tag_id INT8 REFERENCES tags(id) ON DELETE CASCADE
 );
 
 CREATE TABLE wallet (
   id SERIAL8 primary key,
-  cash_balance INT2,
-  budget_amount INT2,
+  cash_balance NUMERIC,
+  budget_amount NUMERIC,
   budget_start_date DATE,
   budget_end_date DATE
 );
