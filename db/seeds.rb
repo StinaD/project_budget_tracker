@@ -1,14 +1,19 @@
 require( 'pry-byebug' )
 
-merchant1 = Merchant.new({
-  'merchant_name' => "H&M"
-  })
+Merchant.delete_all
+Tag.delete_all
+
+merchant1 = Merchant.new({'merchant_name' => 'H&M'})
 merchant1.save
 
-tag1 = Tag.new({
-  'tag_name' => "Clothes"
-  })
-
+tag1 = Tag.new({'tag_name' => 'Clothes'})
+tag2 = Tag.new({'tag_name' => 'Groceries'})
+tag3 = Tag.new({'tag_name' => 'Entertainment'})
+tag4 = Tag.new({'tag_name' => 'Subscription'})
+tag1.save
+tag2.save
+tag3.save
+tag4.save
 
 transaction1 = Transaction.new({
   'transcation_type' => "Purchase",
