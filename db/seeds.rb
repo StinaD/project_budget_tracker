@@ -3,6 +3,7 @@ require( 'pry-byebug' )
 merchant1 = Merchant.new({
   'merchant_name' => "H&M"
   })
+merchant1.save
 
 tag1 = Tag.new({
   'tag_name' => "Clothes"
