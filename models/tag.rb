@@ -12,6 +12,14 @@ attr_reader :id, :tag_name
   end
 
 
+# class functions ---------
+  def Tag.delete_all
+    sql = "DELETE FROM tags;"
+    SqlRunner.run( sql )
+  end
+
+
+# instance functions ------
   def save()
     sql = "INSERT INTO tags
     (
@@ -27,10 +35,7 @@ attr_reader :id, :tag_name
     @id = merchant.first()['id'].to_i
   end
 
-  def Tag.delete_all
-    sql = "DELETE FROM tags;"
-    SqlRunner.run( sql )
-  end
+
 
 
 end

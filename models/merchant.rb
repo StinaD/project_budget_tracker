@@ -11,7 +11,32 @@ attr_accessor :merchant_name
     @merchant_name = options['merchant_name']
   end
 
+# class functions ------------
+  def Merchant.all
+    sql = "SELECT * FROM merchants;"
+    merchants_data = SqlRunner.run( sql )
+    result = merchants_data.map { |merchant| Merchant.new(merchant) }
+    return result
+  end
 
+
+  def Merchant.delete_all
+    sql = "DELETE FROM merchants;"
+    SqlRunner.run( sql )
+  end
+
+
+  def self.find(id)
+    sql = "SELECT * FROM merchants
+    WHERE id = $1;"
+    values = [id]
+    result = SqlRunner.run( sql, values )
+    merchant = Merchant.new(result.first)
+    return merchant
+  end
+
+
+# instance functions --------
   def save()
     sql = "INSERT INTO merchants
     (
@@ -43,23 +68,6 @@ attr_accessor :merchant_name
   end
 
 
-  def Merchant.all
-    sql = "SELECT * FROM merchants;"
-    merchants_data = SqlRunner.run( sql )
-    result = merchants_data.map { |merchant| Merchant.new(merchant) }
-    return result
-  end
-
-
-  def self.find(id)
-    sql = "SELECT * FROM merchants
-    WHERE id = $1;"
-    values = [id]
-    result = SqlRunner.run( sql, values )
-    merchant = Merchant.new(result.first)
-    return merchant
-  end
-
   def delete()
     sql = "DELETE FROM merchants
     WHERE id = $1;"
@@ -67,10 +75,7 @@ attr_accessor :merchant_name
     SqlRunner.run( sql, values )
   end
 
-  def Merchant.delete_all
-    sql = "DELETE FROM merchants;"
-    SqlRunner.run( sql )
-  end
+
 
 
 end

@@ -40,5 +40,9 @@ transaction2 = Transaction.new({
   })
 transaction2.save
 
-binding.pry
-nil
+transaction2.amount = 50.00
+transaction2.update 
+
+
+# binding.pry
+# nil
