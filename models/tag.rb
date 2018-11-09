@@ -3,8 +3,8 @@ require_relative('../db/sql_runner')
 
 class Tag
 
-attr_reader :id
-attr_accessor :tag_name
+attr_reader :id, :tag_name
+
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
@@ -30,7 +30,7 @@ attr_accessor :tag_name
   def Tag.delete_all
     sql = "DELETE FROM tags;"
     SqlRunner.run( sql )
-  end 
+  end
 
 
 end
