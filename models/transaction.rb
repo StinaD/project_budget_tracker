@@ -69,7 +69,7 @@ class Transaction
 
 
 
-# instance functions --------
+# instance functions ---------
   def save()
     sql = "INSERT INTO transactions
     (

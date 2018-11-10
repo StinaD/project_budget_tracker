@@ -2,10 +2,12 @@ require( 'pry-byebug' )
 require_relative( 'models/merchant' )
 require_relative( 'models/tag' )
 require_relative( 'models/transaction' )
+require_relative( 'models/wallet' )
 
 Transaction.delete_all
 Merchant.delete_all
 Tag.delete_all
+Wallet.delete_all
 
 
 merchant1 = Merchant.new({'merchant_name' => 'H&M'})
@@ -43,7 +45,26 @@ transaction2.save
 # transaction2.amount = 50.00
 # transaction2.update
 
-p Transaction.sort_by_date
+# p Transaction.sort_by_date
+
+wallet1 = Wallet.new({
+  'cash_balance' => 500.00,
+  'budget_amount' => 200.00,
+  'budget_start_date' => '2018-11-01',
+  'budget_end_date' => '2018-11-30'
+  })
+wallet1.save
+
+wallet2 = Wallet.new({
+  'cash_balance' => 1000.00,
+  'budget_amount' => 400.00,
+  'budget_start_date' => '2018-11-01',
+  'budget_end_date' => '2018-11-30'
+  })
+wallet2.save
+
+
+p Wallet.all 
 
 # binding.pry
 # nil
