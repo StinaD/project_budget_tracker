@@ -40,9 +40,10 @@ transaction2 = Transaction.new({
   })
 transaction2.save
 
-transaction2.amount = 50.00
-transaction2.update 
+# transaction2.amount = 50.00
+# transaction2.update
 
+p Transaction.sort_by_date
 
 # binding.pry
 # nil

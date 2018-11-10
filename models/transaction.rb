@@ -30,6 +30,13 @@ class Transaction
     return transactions
   end
 
+  def self.sort_by_date
+    sql = "SELECT * FROM transactions ORDER BY transaction_date DESC;"
+    transaction_data = SqlRunner.run(sql)
+    transactions = map_items(transaction_data)
+    return transactions
+  end
+
   def self.find(id)
     sql = "SELECT * FROM transactions
     WHERE id = $1"
@@ -48,6 +55,18 @@ class Transaction
     result = Transaction.map_items(transaction_data)
     return result.first
   end
+
+# --------------------------------------------
+# ********************************************
+  def self.total
+    # sql = "SELECT SUM(amount)
+    # FROM transactions;"
+    # transaction_data = SqlRunner.run(sql)
+    # map_item(transaction_data)
+    transactions = self.all
+    return transactions.reduce(0) { |sum, transaction| sum + transaction.amount }
+  end
+
 
 
 # instance functions --------
