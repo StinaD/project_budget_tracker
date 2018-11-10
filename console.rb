@@ -4,6 +4,7 @@ require_relative( 'models/tag' )
 require_relative( 'models/transaction' )
 require_relative( 'models/wallet' )
 
+
 Transaction.delete_all
 Merchant.delete_all
 Tag.delete_all
@@ -64,7 +65,7 @@ wallet2 = Wallet.new({
 wallet2.save
 
 
-p Wallet.all 
+wallet2.number_of_days_in_budget
 
 # binding.pry
 # nil

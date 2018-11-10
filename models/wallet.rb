@@ -1,3 +1,4 @@
+require 'date'
 require( 'pry-byebug' )
 require_relative('../db/sql_runner')
 
@@ -76,6 +77,29 @@ class Wallet
     values = [@cash_balance, @budget_amount, @budget_start_date, @budget_end_date, @id]
     SqlRunner.run( sql, values )
   end
+
+
+  def number_of_days_spent()
+    today = Date.today
+    start_date = Date.parse(@budget_start_date)
+    days_passed = today - start_date
+    return days_passed.to_i
+  end
+
+  def number_of_days_remaining()
+    today = Date.today
+    end_date = Date.parse(@budget_end_date)
+    days_remaining = end_date - today
+    return days_remaining.to_i
+  end
+
+  def number_of_days_in_budget()
+    start_date = Date.parse(@budget_start_date)
+    end_date = Date.parse(@budget_end_date)
+    total_days = end_date - start_date
+    total_days.to_i
+  end
+
 
 
 
