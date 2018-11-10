@@ -25,29 +25,6 @@ tag2.save
 tag3.save
 tag4.save
 
-transaction1 = Transaction.new({
-  'transaction_type' => "Purchase",
-  'amount' => 34.00,
-  'transaction_date' => '2005-09-14',
-  'tag_id' => tag1.id,
-  'merchant_id' => merchant1.id
-  })
-transaction1.save
-
-transaction2 = Transaction.new({
-  'transaction_type' => "Purchase",
-  'amount' => 40.00,
-  'transaction_date' => '2005-12-25',
-  'tag_id' => tag2.id,
-  'merchant_id' => merchant2.id
-  })
-transaction2.save
-
-# transaction2.amount = 50.00
-# transaction2.update
-
-# p Transaction.sort_by_date
-
 wallet1 = Wallet.new({
   'cash_balance' => 500.00,
   'budget_amount' => 200.00,
@@ -56,16 +33,55 @@ wallet1 = Wallet.new({
   })
 wallet1.save
 
-wallet2 = Wallet.new({
-  'cash_balance' => 1000.00,
-  'budget_amount' => 400.00,
-  'budget_start_date' => '2018-11-01',
-  'budget_end_date' => '2018-11-30'
+
+transaction1 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 34.00,
+  'transaction_date' => '2018-12-02',
+  'tag_id' => tag1.id,
+  'merchant_id' => merchant1.id,
+  'wallet_id' => wallet1.id
+
   })
-wallet2.save
+transaction1.save
+
+transaction2 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 30.00,
+  'transaction_date' => '2018-11-25',
+  'tag_id' => tag2.id,
+  'merchant_id' => merchant2.id,
+  'wallet_id' => wallet1.id
+  })
+transaction2.save
+
+transaction3 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 40.00,
+  'transaction_date' => '2018-11-18',
+  'tag_id' => tag2.id,
+  'merchant_id' => merchant2.id,
+  'wallet_id' => wallet1.id
+  })
+transaction3.save
+
+# transaction2.amount = 50.00
+# transaction2.update
+
+# p Transaction.sort_by_date
 
 
-wallet2.number_of_days_in_budget
+# wallet2 = Wallet.new({
+#   'cash_balance' => 1000.00,
+#   'budget_amount' => 400.00,
+#   'budget_start_date' => '2018-11-01',
+#   'budget_end_date' => '2018-11-30'
+#   })
+# wallet2.save
 
+
+wallet1.budget_overspend_warning
+# binding.pry
+# nil
 # binding.pry
 # nil

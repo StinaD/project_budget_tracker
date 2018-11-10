@@ -13,19 +13,20 @@ CREATE TABLE tags (
   tag_name VARCHAR(120)
 );
 
-CREATE TABLE transactions (
-  id SERIAL8 primary key,
-  transaction_type VARCHAR(120),
-  amount NUMERIC,
-  transaction_date DATE,
-  merchant_id INT8 REFERENCES merchants(id) ON DELETE CASCADE,
-  tag_id INT8 REFERENCES tags(id) ON DELETE CASCADE
-);
-
 CREATE TABLE wallet (
   id SERIAL8 primary key,
   cash_balance NUMERIC,
   budget_amount NUMERIC,
   budget_start_date DATE,
   budget_end_date DATE
+);
+
+CREATE TABLE transactions (
+  id SERIAL8 primary key,
+  transaction_type VARCHAR(120),
+  amount NUMERIC,
+  transaction_date DATE,
+  merchant_id INT8 REFERENCES merchants(id) ON DELETE CASCADE,
+  tag_id INT8 REFERENCES tags(id) ON DELETE CASCADE,
+  wallet_id INT8 REFERENCES wallet(id) ON DELETE CASCADE
 );

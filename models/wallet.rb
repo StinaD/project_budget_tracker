@@ -1,6 +1,7 @@
 require 'date'
 require( 'pry-byebug' )
 require_relative('../db/sql_runner')
+require_relative('transaction')
 
 class Wallet
 
@@ -100,7 +101,40 @@ class Wallet
     total_days.to_i
   end
 
+  def budget_transactions()
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    WHERE wallet.id = $1;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
+    return transactions
+  end
 
+  def budget_total_spend
+    transactions = budget_transactions
+    total_spend = transactions.reduce(0) { |sum, transaction| sum + transaction.amount }
+    return total_spend
+  end
 
+  def remaining_budget
+    spend = budget_total_spend
+    return @budget_amount - spend
+  end
+
+  def budget_overspend_warning
+    warning_limit = @budget_amount / 4
+    remaining = remaining_budget
+    days = number_of_days_remaining
+    if remaining <= warning_limit
+      p "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
+    else
+      p "You have £#{remaining}0 remaining from your budget of #{@budget_amount}0."
+    end
+  end
 
 end
