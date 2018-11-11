@@ -88,10 +88,10 @@ class WalletTest < MiniTest::Test
     assert_equal(200.0, @wallet1.budget_amount)
   end
 
-  # def test_update_budget_amount__refund()
-  #   @wallet2.update_budget_amount(@transaction4)
-  #   assert_equal(330.0, @wallet1.budget_amount)
-  # end
+  def test_update_budget_amount__refund()
+    @wallet2.update_budget_amount(@transaction4)
+    assert_equal(330.0, @wallet1.budget_amount)
+  end
 
   def test_days_spent()
     start_date = Date.parse(@wallet1.budget_start_date)

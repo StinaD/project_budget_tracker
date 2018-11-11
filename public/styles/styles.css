@@ -1,0 +1,23 @@
+p {
+  font-family: 'Quicksand', Arial, sans-serif;
+  color: 	#808080;
+  padding-left: 15px;
+}
+
+
+header {
+  background-color: #00ff71;
+  border-bottom: 1px solid #00ff71;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
