@@ -36,7 +36,7 @@ wallet1.save
 
 transaction1 = Transaction.new({
   'transaction_type' => "Purchase",
-  'amount' => 34.00,
+  'amount' => 20.00,
   'transaction_date' => '2018-12-02',
   'tag_id' => tag1.id,
   'merchant_id' => merchant1.id,
@@ -80,7 +80,7 @@ transaction3.save
 # wallet2.save
 
 
-wallet1.budget_overspend_warning
+wallet1.update_budget_amount(transaction3)
 # binding.pry
 # nil
 # binding.pry

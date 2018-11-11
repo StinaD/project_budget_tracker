@@ -133,8 +133,36 @@ class Wallet
     if remaining <= warning_limit
       p "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
     else
-      p "You have £#{remaining}0 remaining from your budget of #{@budget_amount}0."
+      p "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0."
     end
   end
+
+  def update_cash_balance(transaction)
+    type = transaction.transaction_type
+    if type == "Refund"
+      @cash_balance += transaction.amount
+    elsif type == "Deposit"
+      @cash_balance += transaction.amount
+    else
+      @cash_balance -= transaction.amount
+    end
+  end
+
+  def update_budget_amount(transaction)
+    type = transaction.transaction_type
+    spend = transaction.amount
+    start_date = Date.parse(@budget_start_date)
+    end_date = Date.parse(@budget_end_date)
+    transaction_date = Date.parse(transaction.transaction_date)
+    return unless transaction_date >= start_date && transaction_date <= end_date
+    return unless type == "Refund" || type == "Purchase"
+    if type == "Purchase"
+      @budget_amount -= spend
+    else type == "Refund"
+      @budget_amount += spend
+    end
+    return @budget_amount 
+  end
+
 
 end
