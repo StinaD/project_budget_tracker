@@ -11,8 +11,8 @@ class Wallet
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @wallet_name = options['wallet_name']
-    @cash_balance = options['cash_balance']
-    @budget_amount = options['budget_amount']
+    @cash_balance = options['cash_balance'].to_f
+    @budget_amount = options['budget_amount'].to_f
     @budget_start_date = options['budget_start_date']
     @budget_end_date = options['budget_end_date']
   end
@@ -100,7 +100,7 @@ class Wallet
   def number_of_days_in_budget()
     start_date = Date.parse(@budget_start_date)
     end_date = Date.parse(@budget_end_date)
-    total_days = end_date - start_date
+    total_days = end_date - start_date + 1
     total_days.to_i
   end
 
@@ -134,22 +134,25 @@ class Wallet
     remaining = remaining_budget
     days = number_of_days_remaining
     if remaining <= warning_limit
-      p "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
+      return "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
     else
-      p "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0."
+      return "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0 and #{days} days left to spend or save."
     end
   end
 
-  def update_cash_balance(transaction)
-    type = transaction.transaction_type
-    if type == "Refund"
-      @cash_balance += transaction.amount
-    elsif type == "Deposit"
-      @cash_balance += transaction.amount
-    else
-      @cash_balance -= transaction.amount
+  def update_cash_balance
+    transactions = Transaction.all
+    transactions.each { |transaction|
+      if transaction.transaction_type == "Refund"
+        @cash_balance += transaction.amount
+      elsif transaction.transaction_type == "Deposit"
+        @cash_balance += transaction.amount
+      else
+        @cash_balance -= transaction.amount
+      end
+      }
+      return @cash_balance
     end
-  end
 
   def update_budget_amount(transaction)
     type = transaction.transaction_type

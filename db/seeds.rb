@@ -10,26 +10,38 @@ Tag.delete_all
 Wallet.delete_all
 Transaction.delete_all
 
-merchant1 = Merchant.new({'merchant_name' => 'H&M'})
+merchant1 = Merchant.new({'merchant_name' => 'Gucci'})
 merchant1.save
-merchant2 = Merchant.new({'merchant_name' => 'Tesco'})
+merchant2 = Merchant.new({'merchant_name' => 'Whole Foods'})
 merchant2.save
+merchant3 = Merchant.new({'merchant_name' => 'The Strand'})
+merchant3.save
+merchant4 = Merchant.new({'merchant_name' => 'Odeon Cinemas'})
+merchant4.save
+merchant5 = Merchant.new({'merchant_name' => "Tiffany's"})
+merchant5.save
+merchant6 = Merchant.new({'merchant_name' => "Macy's"})
+merchant6.save
+merchant6 = Merchant.new({'merchant_name' => "The Plaza"})
+merchant6.save
 
 tag1 = Tag.new({'tag_name' => 'Clothes'})
-tag2 = Tag.new({'tag_name' => 'Groceries'})
-tag3 = Tag.new({'tag_name' => 'Entertainment'})
-tag4 = Tag.new({'tag_name' => 'Dining out'})
-tag5 = Tag.new({'tag_name' => 'Subscription'})
-tag6 = Tag.new({'tag_name' => 'Personal care'})
+tag2 = Tag.new({'tag_name' => 'Handbags and accessories'})
+tag3 = Tag.new({'tag_name' => 'Groceries'})
+tag4 = Tag.new({'tag_name' => 'Entertainment'})
+tag5 = Tag.new({'tag_name' => 'Dining out'})
+tag6 = Tag.new({'tag_name' => 'Subscription'})
+tag7 = Tag.new({'tag_name' => 'Personal care'})
 tag1.save
 tag2.save
 tag3.save
 tag4.save
 tag5.save
 tag6.save
+tag7.save
 
 wallet1 = Wallet.new({
-  'wallet_name' => "Jack's wallet",
+  'wallet_name' => "Jackie O's wallet",
   'cash_balance' => 500.00,
   'budget_amount' => 200.00,
   'budget_start_date' => '2018-11-01',
@@ -39,7 +51,7 @@ wallet1.save
 
 transaction1 = Transaction.new({
   'transaction_type' => "Purchase",
-  'amount' => 34.00,
+  'amount' => 70.00,
   'transaction_date' => '2018-11-08',
   'merchant_id' => merchant1.id,
   'tag_id' => tag1.id,
@@ -52,17 +64,38 @@ transaction2 = Transaction.new({
   'amount' => 30.00,
   'transaction_date' => '2018-10-25',
   'merchant_id' => merchant2.id,
-  'tag_id' => tag2.id,
+  'tag_id' => tag3.id,
   'wallet_id' => wallet1.id
   })
 transaction2.save
 
 transaction3 = Transaction.new({
-  'transaction_type' => "Purchase",
+  'transaction_type' => "Refund",
   'amount' => 40.00,
   'transaction_date' => '2018-11-05',
-  'tag_id' => tag2.id,
   'merchant_id' => merchant2.id,
+  'tag_id' => tag3.id,
   'wallet_id' => wallet1.id
   })
 transaction3.save
+
+transaction4 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 150.00,
+  'transaction_date' => '2018-11-05',
+  'merchant_id' => merchant5.id,
+  'tag_id' => tag2.id,
+  'wallet_id' => wallet1.id
+  })
+transaction4.save
+
+
+transaction5 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 150.00,
+  'transaction_date' => '2018-11-05',
+  'merchant_id' => merchant6.id,
+  'tag_id' => tag5.id,
+  'wallet_id' => wallet1.id
+  })
+transaction5.save

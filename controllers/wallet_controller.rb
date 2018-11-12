@@ -7,5 +7,6 @@ also_reload( '../models/*' )
 
 
 get '/wallet' do
-  "Hello World"
+  @wallet = Wallet.all
+  erb(:"wallet/show")
 end

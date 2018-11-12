@@ -1,0 +1,13 @@
+
+
+<ul>
+  <% for wallet in @wallet%>
+    <li><%=wallet.wallet_name%>
+    <li>Current balance: £<%=wallet.update_cash_balance%></li>
+    <br>
+    <li>Budget amount: £<%=wallet.budget_amount%></li>
+    <li>Budget period: <%=wallet.number_of_days_in_budget%> day budget between <%=wallet.budget_start_date%> - <%=wallet.budget_end_date%></li>
+    <br>
+    <li><%=wallet.budget_overspend_warning%></li>
+  <%end%>
+</ul>
