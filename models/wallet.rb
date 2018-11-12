@@ -6,7 +6,7 @@ require_relative('transaction')
 class Wallet
 
   attr_reader :id
-  attr_accessor :cash_balance, :budget_amount, :budget_start_date, :budget_end_date
+  attr_accessor :wallet_name, :cash_balance, :budget_amount, :budget_start_date, :budget_end_date
 
   def initialize( options )
     @id = options['id'].to_i if options['id']

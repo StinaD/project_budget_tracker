@@ -2,7 +2,7 @@ require( 'pry-byebug' )
 require_relative('../db/sql_runner')
 require_relative('tag')
 require_relative('merchant')
-
+require_relative('wallet')
 
 class Transaction
 
@@ -132,7 +132,7 @@ class Transaction
     WHERE transactions.merchant_id = $1;"
     values = [@merchant_id]
     merchant_data = SqlRunner.run( sql, values )
-    
+
     result = merchant_data.map { |merchant| Merchant.new(merchant) }
     merchant = result.first
     return merchant.merchant_name

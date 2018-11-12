@@ -1,7 +1,19 @@
 <form action="/transactions" method="post">
 
   <div class="form">
-  <label for="merchant_select">Shop (add <a href="/merchants/new">new</a> if not listed):</label>
+  <label for="wallet_select">Select wallet:</label>
+  <select id= "wallet_select" name="wallet_id">
+
+    <% @wallet.each do |wallet| %>
+      <option value=<%= wallet.id %>><%= wallet.wallet_name %></option>
+    <% end %>
+  </select>
+  </div>
+
+  <br>
+
+  <div class="form">
+  <label for="merchant_select">Select merchant (add <a href="/merchants/new">new</a> if not listed):</label>
 
   <select id="merchant_select" name="merchant_id">
     <% @merchants.each do |merchant|%>
@@ -10,35 +22,43 @@
   </select>
   </div>
 
-
+  <br>
 
   <div class="form">
-  <label for="transaction-type">Transaction type:</label>
-  <input id="transaction-type" type="radio" value="purchase" name="transaction_type">Purchase<br>
-  <input id="transaction-type" type="radio" value="Refund" name="transaction_type">Refund<br>
-  <input id="transaction-type" type="radio" value="Deposit" name="transaction_type">Deposit<br>
+    <label for="transaction-type">Transaction type:</label>
+    <br>
+    <input id="transaction-type" type="radio" value="purchase" name="transaction_type">Purchase<br>
+    <input id="transaction-type" type="radio" value="Refund" name="transaction_type">Refund<br>
+    <input id="transaction-type" type="radio" value="Deposit" name="transaction_type">Deposit<br>
   </div>
 
+  <br>
+
   <div class="form">
-  <label for="amount">Amount:</label>
-  <input type="number" name="amount" required>
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" required>
   </div>
 
+  <br>
+
   <div class="form">
-  <label for="date">Transaction date:</label>
-  <input type="date" name="transaction_date" required>
+    <label for="date">Transaction date:</label>
+    <input type="date" name="transaction_date" required>
   </div>
 
-  <div class="form">
-  <label for="tag_select">Tag:</label>
-  <select id= "tag_select" name="tag_id">
+  <br>
 
-    <% @tags.each do |tag| %>
+  <div class="form">
+    <label for="tag_select">Select tag:</label>
+    <select id= "tag_select" name="tag_id">
+
+      <% @tags.each do |tag| %>
       <option value=<%= tag.id %>><%= tag.tag_name %></option>
     <% end %>
+  </select>
   </div>
 
-
+  <br>
 
   <input type="submit" value="Save transaction">
 

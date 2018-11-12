@@ -9,6 +9,7 @@
     <th scope ="col">Type</th>
     <th scope ="col">Amount</th>
     <th scope ="col">Tag</th>
+    <th scope ="col">Amend<th>
   </thead>
 
   <tbody>
@@ -19,8 +20,10 @@
       <td><%=transaction.transaction_type%></td>
       <td><%=transaction.amount%></td>
       <td><%=transaction.tag_name%></td>
+      <td><a href="/transactions/<%=transaction.id %>/edit">Edit</a>
+      </td>
     </tr>
-      <%end%>
+  <%end%>
   </tbody>
 
 

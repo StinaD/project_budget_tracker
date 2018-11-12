@@ -1,0 +1,80 @@
+<h2>Edit <%@transaction.transaction_type%> transaction from <%= @transaction.transaction_date%></h2>
+
+<br>
+<form method="POST" action="/transactions">
+
+
+    <div class="form">
+      <label for="wallet_select">Select wallet:</label>
+      <select name="wallet_id" id="wallet_select" selected="<%= @transaction.wallet_id  %>">
+        <% @wallet.each do |wallet| %>
+          <% if wallet.id == @transaction.wallet_id %>
+            <option value=<%= wallet.id %> selected><%= wallet.wallet_name %></option>
+          <% else %>
+            <option value=<%= wallet.id %>><%= wallet.wallet_name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+
+    <br>
+
+    <div class="form">
+      <label for="merchant_select">Select merchant:</label>
+      <select name="merchant_id" id="merchant_select" selected="<%= @transaction.merchant_id  %>">
+        <% @merchants.each do |merchant| %>
+          <% if merchant.id == @transaction.merchant_id %>
+            <option value=<%= merchant.id %> selected><%= merchant.merchant_name %></option>
+          <% else %>
+            <option value=<%= merchant.id %>><%= merchant.merchant_name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+
+    <br>
+
+    <div class="form">
+      <label for="transaction-type">Transaction type:</label>
+      <br>
+      <input id="transaction-type" type="radio" value="purchase" name="transaction_type" required>Purchase<br>
+      <input id="transaction-type" type="radio" value="Refund" name="transaction_type" required>Refund<br>
+      <input id="transaction-type" type="radio" value="Deposit" name="transaction_type" required>Deposit<br>
+    </div>
+
+    <br>
+
+    <div class="form">
+      <label for="amount">Amount:</label>
+      <input type="number" name="amount" id="amount" value="<%= @transaction.amount %>"/>
+    </div>
+
+    <br>
+
+    <div class="form">
+      <label for="date">Transaction date:</label>
+      <input type="date" name="transaction_date" id="date" value="<%= @transaction.transaction_date %>"/>
+    </div>
+
+    <br>
+
+    <div class="form">
+      <label for="tag_select">Select tag:</label>
+      <select name="tag_id" id="tag_select" selected="<%= @transaction.tag_id  %>">
+        <% @tags.each do |tag| %>
+          <% if tag.id == @transaction.tag_id %>
+            <option value=<%= tag.id %> selected><%= tag.tag_name %></option>
+          <% else %>
+            <option value=<%= tag.id %>><%= tag.tag_name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+
+
+    <div class="form">
+      <input type="submit" value="Update transaction"/>
+    </div>
+
+  </div>
+</form>
