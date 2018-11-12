@@ -1,0 +1,19 @@
+<h3>Shops</h3>
+
+<p><a href="/merchants/new">Add Shop</a></p>
+
+<ul>
+  <% for merchant in @merchants%>
+  <li>
+  <p><%=merchant.merchant_name%></p>
+
+  <p>
+    <form action="/merchants/<%= merchant.id %>/delete" method="POST">
+    <input type="submit" value="delete"/>
+    </form>
+  </p>
+
+  </li>
+  <%end%>
+
+</ul>

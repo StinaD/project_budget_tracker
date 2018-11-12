@@ -12,15 +12,16 @@ attr_accessor :merchant_name
   end
 
 # class functions ------------
-  def Merchant.all
-    sql = "SELECT * FROM merchants;"
+  def self.all
+    sql = "SELECT * FROM merchants
+    ORDER BY merchant_name ASC;"
     merchants_data = SqlRunner.run( sql )
     result = merchants_data.map { |merchant| Merchant.new(merchant) }
     return result
   end
 
 
-  def Merchant.delete_all
+  def self.delete_all
     sql = "DELETE FROM merchants;"
     SqlRunner.run( sql )
   end
@@ -35,6 +36,12 @@ attr_accessor :merchant_name
     return merchant
   end
 
+  def self.delete(id)
+    sql = "DELETE FROM merchants
+    WHERE id = $1;"
+    values = [id]
+    SqlRunner.run( sql, values )
+  end
 
 # instance functions --------
   def save()
@@ -68,12 +75,7 @@ attr_accessor :merchant_name
   end
 
 
-  def delete()
-    sql = "DELETE FROM merchants
-    WHERE id = $1;"
-    values = [@id]
-    SqlRunner.run( sql, values )
-  end
+
 
 
 

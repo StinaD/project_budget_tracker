@@ -45,9 +45,19 @@ transaction1.save
 transaction2 = Transaction.new({
   'transaction_type' => "Purchase",
   'amount' => 30.00,
-  'transaction_date' => '2018-11-25',
+  'transaction_date' => '2018-10-25',
   'merchant_id' => merchant2.id,
   'tag_id' => tag2.id,
   'wallet_id' => wallet1.id
   })
 transaction2.save
+
+transaction3 = Transaction.new({
+  'transaction_type' => "Purchase",
+  'amount' => 40.00,
+  'transaction_date' => '2018-11-05',
+  'tag_id' => tag2.id,
+  'merchant_id' => merchant2.id,
+  'wallet_id' => wallet1.id
+  })
+transaction3.save
