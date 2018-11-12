@@ -18,13 +18,18 @@ merchant2.save
 tag1 = Tag.new({'tag_name' => 'Clothes'})
 tag2 = Tag.new({'tag_name' => 'Groceries'})
 tag3 = Tag.new({'tag_name' => 'Entertainment'})
-tag4 = Tag.new({'tag_name' => 'Subscription'})
+tag4 = Tag.new({'tag_name' => 'Dining out'})
+tag5 = Tag.new({'tag_name' => 'Subscription'})
+tag6 = Tag.new({'tag_name' => 'Personal care'})
 tag1.save
 tag2.save
 tag3.save
 tag4.save
+tag5.save
+tag6.save
 
 wallet1 = Wallet.new({
+  'wallet_name' => "Jack's wallet",
   'cash_balance' => 500.00,
   'budget_amount' => 200.00,
   'budget_start_date' => '2018-11-01',
@@ -61,5 +66,3 @@ transaction3 = Transaction.new({
   'wallet_id' => wallet1.id
   })
 transaction3.save
-
-p transaction3.tag_name

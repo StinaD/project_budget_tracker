@@ -2,6 +2,8 @@
 <html>
 
   <head>
+
+    <link rel="stylesheet" type="text/css" href="/styles/forms.css">
   </head>
 
   <body>
@@ -9,7 +11,7 @@
     <header>
       <h1>Bobber</h1>
       <h5>The app that helps you keep track of your spending.</h5>
-      <h3>Current balance:</h3>
+      <%erb(:"wallet/cash_balance")%>
     </header>
 
     <nav>
@@ -21,7 +23,7 @@
         <a href="/transactions">Transactions</a>
       </li>
       <li>
-        <a href="/merchants">Shops</a>
+        <a href="/merchants">Merchants</a>
       </li>
     </ul>
 

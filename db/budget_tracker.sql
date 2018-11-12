@@ -15,6 +15,7 @@ CREATE TABLE tags (
 
 CREATE TABLE wallet (
   id SERIAL8 primary key,
+  wallet_name VARCHAR(120),
   cash_balance NUMERIC,
   budget_amount NUMERIC,
   budget_start_date DATE,

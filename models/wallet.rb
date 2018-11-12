@@ -10,6 +10,7 @@ class Wallet
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
+    @wallet_name = options['wallet_name']
     @cash_balance = options['cash_balance']
     @budget_amount = options['budget_amount']
     @budget_start_date = options['budget_start_date']
@@ -46,6 +47,7 @@ class Wallet
   def save()
     sql = "INSERT INTO Wallet
     (
+      wallet_name,
       cash_balance,
       budget_amount,
       budget_start_date,
@@ -53,10 +55,10 @@ class Wallet
     )
     VALUES
     (
-      $1, $2, $3, $4
+      $1, $2, $3, $4, $5
       )
     RETURNING *"
-    values = [@cash_balance, @budget_amount, @budget_start_date, @budget_end_date]
+    values = [@wallet_name, @cash_balance, @budget_amount, @budget_start_date, @budget_end_date]
     wallet = SqlRunner.run(sql, values)
     @id = wallet.first()['id'].to_i
   end
@@ -66,16 +68,17 @@ class Wallet
     sql = "UPDATE wallet
     SET
     (
+      wallet_name,
       cash_balance,
       budget_amount,
       budget_start_date,
       budget_end_date
       ) =
     (
-      $1, $2, $3, $4
+      $1, $2, $3, $4, $5
       )
-    where id = $5"
-    values = [@cash_balance, @budget_amount, @budget_start_date, @budget_end_date, @id]
+    where id = $6"
+    values = [@wallet_name, @cash_balance, @budget_amount, @budget_start_date, @budget_end_date, @id]
     SqlRunner.run( sql, values )
   end
 
@@ -161,7 +164,7 @@ class Wallet
     else type == "Refund"
       @budget_amount += spend
     end
-    return @budget_amount 
+    return @budget_amount
   end
 
 

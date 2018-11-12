@@ -1,11 +1,13 @@
 <h3>Transactions</h3>
 
+<p><a href="/transactions/new">Add transaction</a></p>
+
 <table>
   <thead>
     <th scope ="col">Date</th>
     <th scope ="col">Shop</th>
-    <th scope ="col">Amount</th>
     <th scope ="col">Type</th>
+    <th scope ="col">Amount</th>
     <th scope ="col">Tag</th>
   </thead>
 
@@ -13,17 +15,18 @@
     <tr>
       <%for transaction in @transactions%>
       <td><%=transaction.transaction_date%></td>
-      <td><%=@merchants.find(transaction.merchant_id).merchant.name%></td>
-      <td><%=transaction.amount%></td>
+      <td><%=transaction.shop_name%></td>
       <td><%=transaction.transaction_type%></td>
-      <td><%=(@tags.find(transaction.tag_id).tag_name)%></td>
+      <td><%=transaction.amount%></td>
+      <td><%=transaction.tag_name%></td>
+    </tr>
       <%end%>
   </tbody>
 
 
   <tfoot>
     <tr>
-      <td>Total</td>
-      <td><%=transaction.total%></td>
+      <td colspan="3">Total</td>
+      <td colspan="2"><%=Transaction.total%></td>
   </tfoot>
 </table>

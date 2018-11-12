@@ -29,7 +29,8 @@ class Transaction
 
 
   def self.all()
-    sql = "SELECT * FROM transactions"
+    sql = "SELECT * FROM transactions
+    ORDER BY transaction_date DESC"
     transaction_data = SqlRunner.run(sql)
     transactions = map_items(transaction_data)
     return transactions
@@ -123,7 +124,7 @@ class Transaction
   end
 
 
-  def merchant_name
+  def shop_name
     sql ="SELECT merchants.*
     FROM merchants
     INNER JOIN transactions
@@ -131,8 +132,10 @@ class Transaction
     WHERE transactions.merchant_id = $1;"
     values = [@merchant_id]
     merchant_data = SqlRunner.run( sql, values )
+    
     result = merchant_data.map { |merchant| Merchant.new(merchant) }
-    return result.first.merchant_name
+    merchant = result.first
+    return merchant.merchant_name
   end
 
 
