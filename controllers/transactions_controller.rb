@@ -9,5 +9,8 @@ also_reload( '../models/*' )
 
 
 get '/transactions' do
-  p "Hello World"
+  @transactions = Transaction.all
+  @merchants = Merchant.all
+  @tags = Tag.all
+  erb(:"transactions/show")
 end

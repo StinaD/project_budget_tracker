@@ -1,10 +1,13 @@
 require( 'pry-byebug' )
 require_relative('../db/sql_runner')
+require_relative('tag')
+require_relative('merchant')
+
 
 class Transaction
 
   attr_reader :id
-  attr_accessor :transaction_type, :amount, :transaction_date, :tag_id, :merchant_id, :wallet_id 
+  attr_accessor :transaction_type, :amount, :transaction_date, :tag_id, :merchant_id, :wallet_id
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
@@ -19,7 +22,8 @@ class Transaction
 
 # class functions ------------
   def self.delete_all()
-    sql = "DELETE FROM transactions"
+    sql = "SELECT * FROM transactions
+    ORDER BY transaction_date DESC;"
     SqlRunner.run( sql )
   end
 
@@ -119,8 +123,30 @@ class Transaction
   end
 
 
+  def merchant_name
+    sql ="SELECT merchants.*
+    FROM merchants
+    INNER JOIN transactions
+    ON transactions.merchant_id = merchants.id
+    WHERE transactions.merchant_id = $1;"
+    values = [@merchant_id]
+    merchant_data = SqlRunner.run( sql, values )
+    result = merchant_data.map { |merchant| Merchant.new(merchant) }
+    return result.first.merchant_name
+  end
 
 
+  def tag_name
+    sql ="SELECT tags.*
+    FROM tags
+    INNER JOIN transactions
+    ON transactions.tag_id = tags.id
+    WHERE transactions.tag_id = $1;"
+    values = [@tag_id]
+    tag_data = SqlRunner.run( sql, values )
+    result = tag_data.map { |tag| Tag.new(tag) }
+    return result.first.tag_name
+  end
 
 
 

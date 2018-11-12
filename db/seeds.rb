@@ -61,3 +61,5 @@ transaction3 = Transaction.new({
   'wallet_id' => wallet1.id
   })
 transaction3.save
+
+p transaction3.tag_name

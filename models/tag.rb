@@ -13,9 +13,25 @@ attr_reader :id, :tag_name
 
 
 # class functions ---------
-  def Tag.delete_all
+  def self.delete_all
     sql = "DELETE FROM tags;"
     SqlRunner.run( sql )
+  end
+
+  def self.all
+    sql = "SELECT * FROM tags
+    ORDER BY tag_name ASC;"
+    result = SqlRunner.run( sql )
+    return result.map { |tag| Tag.new(tag) }
+  end
+
+  def self.find(id)
+    sql = "SELECT * FROM tags
+    WHERE id = $1;"
+    values = [id]
+    result = SqlRunner.run( sql, values )
+    tag = Tag.new(result.first)
+    return tag
   end
 
 
