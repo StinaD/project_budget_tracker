@@ -118,6 +118,8 @@ class Wallet
     return transactions
   end
 
+  
+
   def budget_total_spend
     transactions = budget_transactions
     total_spend = transactions.reduce(0) { |sum, transaction| sum + transaction.amount }

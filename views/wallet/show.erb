@@ -11,3 +11,35 @@
     <li><%=wallet.budget_overspend_warning%></li>
   <%end%>
 </ul>
+
+<h5>Transactions during current budget period:</h5>
+
+<table>
+  <thead>
+    <th scope ="col">Date</th>
+    <th scope ="col">Shop</th>
+    <th scope ="col">Type</th>
+    <th scope ="col">Amount</th>
+    <th scope ="col">Tag</th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <%for transaction in @transactions%>
+      <td><%=transaction.transaction_date%></td>
+      <td><%=transaction.shop_name%></td>
+      <td><%=transaction.transaction_type%></td>
+      <td><%=transaction.amount%></td>
+      <td><%=transaction.tag_name%></td>
+      </td>
+    </tr>
+  <%end%>
+  </tbody>
+
+
+  <tfoot>
+    <tr>
+      <td colspan="3">Total</td>
+      <td colspan="2"><%=@wallet1.budget_total_spend%></td>
+  </tfoot>
+</table>

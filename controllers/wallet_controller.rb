@@ -8,5 +8,7 @@ also_reload( '../models/*' )
 
 get '/wallet' do
   @wallet = Wallet.all
+  @wallet1 = @wallet.first
+  @transactions = @wallet1.budget_transactions
   erb(:"wallet/show")
 end
