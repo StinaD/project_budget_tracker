@@ -1,7 +1,10 @@
 
-p, h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, a{
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
+
+
 
 /* TABLE */
 table {
@@ -15,22 +18,27 @@ table {
 
 label {
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
 
 button {
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
 
 select {
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
 
 ul {
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
 
 li {
   font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
 }
 
 thead th {
@@ -52,4 +60,15 @@ th, td {
   text-align: left;
   width: 33.3333%;
   font-size: 16px;
+}
+
+nav {
+  font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
+}
+
+.container nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
