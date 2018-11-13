@@ -43,6 +43,49 @@ class Transaction
     return transactions
   end
 
+  def self.sort_by_tag
+    sql = "SELECT *
+    FROM transactions
+    INNER JOIN tags
+    ON tags.id = transactions.tag_id
+    ORDER BY tag_name ASC;"
+    transaction_data = SqlRunner.run(sql)
+    transactions = map_items(transaction_data)
+    return transactions
+  end
+
+  def self.sort_by_merchant
+    sql = "SELECT *
+    FROM transactions
+    INNER JOIN merchants
+    ON transactions.merchant_id = merchants.id
+    ORDER BY merchant_name ASC;"
+    transaction_data = SqlRunner.run(sql)
+    transactions = map_items(transaction_data)
+    return transactions
+  end
+
+  def self.sort_by_type
+    sql = "SELECT * FROM transactions ORDER BY transaction_type ASC;"
+    transaction_data = SqlRunner.run(sql)
+    transactions = map_items(transaction_data)
+    return transactions
+  end
+
+  def self.sort_by(input)
+    result = case input
+    when "type"
+      sort_by_type
+    when "tag"
+      sort_by_tag
+    when "merchant"
+      sort_by_merchant
+    else
+      sort_by_date
+    end
+    return result
+  end
+
   def self.find(id)
     sql = "SELECT * FROM transactions
     WHERE id = $1"
