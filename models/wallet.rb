@@ -118,7 +118,7 @@ class Wallet
     return transactions
   end
 
-  def budget_transactions_sort_by_date()
+  def budget_transactions_sort_by_date_newest()
     sql = "SELECT transactions.*
     FROM transactions
     INNER JOIN wallet
@@ -127,6 +127,21 @@ class Wallet
     AND transactions.transaction_date <= wallet.budget_end_date
     WHERE wallet.id = $1
     ORDER by transaction_date DESC;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
+    return transactions
+  end
+
+  def budget_transactions_sort_by_date_oldest()
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    WHERE wallet.id = $1
+    ORDER by transaction_date ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
     transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
@@ -158,7 +173,7 @@ class Wallet
     INNER JOIN tags
     ON transactions.tag_id = tags.id
     WHERE wallet.id = $1
-    ORDER by tag_name DESC;"
+    ORDER by tag_name ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
     transactions =  transaction_data.map { |transaction| Transaction.new(transaction) }
@@ -175,12 +190,30 @@ class Wallet
     INNER JOIN merchants
     ON transactions.merchant_id = merchants.id
     WHERE wallet.id = $1
-    ORDER by merchant_name DESC;"
+    ORDER by merchant_name ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
     transactions =  transaction_data.map { |transaction| Transaction.new(transaction) }
     return transactions
   end
+
+
+  def transactions_sort_by(input)
+    result = case input
+    when "type"
+      budget_transactions_sort_by_type
+    when "tag"
+      budget_transactions_sort_by_tag
+    when "merchant"
+      budget_transactions_sort_by_merchant
+    when "date_oldest"
+      budget_transactions_sort_by_date_oldest
+    else
+      budget_transactions_sort_by_date_newest
+    end
+    return result
+  end
+
 
   def budget_total_spend
     transactions = budget_transactions

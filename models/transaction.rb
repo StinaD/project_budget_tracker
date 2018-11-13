@@ -36,8 +36,8 @@ class Transaction
     return transactions
   end
 
-  def self.sort_by_date
-    sql = "SELECT * FROM transactions ORDER BY transaction_date DESC;"
+  def self.sort_by_date_oldest
+    sql = "SELECT * FROM transactions ORDER BY transaction_date ASC;"
     transaction_data = SqlRunner.run(sql)
     transactions = map_items(transaction_data)
     return transactions
@@ -80,8 +80,10 @@ class Transaction
       sort_by_tag
     when "merchant"
       sort_by_merchant
+    when "date_oldest"
+      sort_by_date_oldest
     else
-      sort_by_date
+      all
     end
     return result
   end

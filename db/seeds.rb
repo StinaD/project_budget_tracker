@@ -133,5 +133,4 @@ transaction8 = Transaction.new({
   'wallet_id' => wallet1.id
   })
 transaction8.save
-
-p wallet1.budget_transactions_sort_by_merchant 
+ 

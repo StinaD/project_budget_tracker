@@ -9,8 +9,13 @@ also_reload( '../models/*' )
 get '/wallet' do
   @wallet = Wallet.all
   @wallet1 = @wallet.first
-  @transactions = @wallet1.budget_transactions
+  @transactions = @wallet1.budget_transactions_sort_by_date_newest
   erb(:"wallet/show")
 end
 
-get
+post '/wallet/sort' do
+  @wallet = Wallet.all
+  @wallet1 = @wallet.first
+  @transactions = @wallet1.transactions_sort_by(params['input'])
+  erb(:"wallet/show")
+end

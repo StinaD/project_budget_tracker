@@ -9,7 +9,8 @@
 
 <select id="sort-transactions" form="sort-transactions" name="input">
     <option value="">--Please choose an option--</option>
-    <option value="date">Order by date (default)</option>
+    <option value="date_newest">Order by date - newest to oldest (default)</option>
+    <option value="date_oldest">Order by date - oldest to newest</option>
     <option value="tag">Order by tag (A-Z)</option>
     <option value="type">Order by transaction type (A-Z)</option>
     <option value="merchant">Order by merchant (A-Z)</option>
@@ -23,7 +24,7 @@
 <table>
   <thead>
     <th scope ="col">Date</th>
-    <th scope ="col">Shop</th>
+    <th scope ="col">Merchant</th>
     <th scope ="col">Type</th>
     <th scope ="col">Amount</th>
     <th scope ="col">Tag</th>
