@@ -1,23 +1,55 @@
-p {
-  font-family: 'Quicksand', Arial, sans-serif;
-  color: 	#808080;
-  padding-left: 15px;
+
+p, h1, h2, h3, h4, h5 {
+  font-family: 'Quicksand', sans-serif;
 }
 
-
-header {
-  background-color: #00ff71;
-  border-bottom: 1px solid #00ff71;
-  position: fixed;
-  width: 100%;
-  z-index: 10;
+/* TABLE */
+table {
+  height: 40%;
+  left: 10%;
+  margin: 20px auto;
+  overflow-y: scroll;
+  position: static;
+  width: 80%;
 }
 
+label {
+  font-family: 'Quicksand', sans-serif;
+}
 
-.left {
+button {
+  font-family: 'Quicksand', sans-serif;
+}
+
+select {
+  font-family: 'Quicksand', sans-serif;
+}
+
+ul {
+  font-family: 'Quicksand', sans-serif;
+}
+
+li {
+  font-family: 'Quicksand', sans-serif;
+}
+
+thead th {
+  background: #31537F;
+  font-family: 'Quicksand', sans-serif;
+  color: #FFF;
+}
+
+tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+th, td {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  padding: 5px;
   text-align: left;
-}
-
-.right {
-  text-align: right;
+  width: 33.3333%;
+  font-size: 16px;
 }

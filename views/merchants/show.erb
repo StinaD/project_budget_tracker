@@ -1,4 +1,4 @@
-<h3>Shops</h3>
+<h3>Merchants</h3>
 
 <p><a href="/merchants/new">Add new merchant</a></p>
 
@@ -6,7 +6,7 @@
   <% for merchant in @merchants%>
   <li><%=merchant.merchant_name%>
     <form action="/merchants/<%= merchant.id %>/delete" method="POST">
-    <input type="submit" value="delete"/>
+    <input type="submit" value="Delete"/>
     </form>
   </li>
   <%end%>
