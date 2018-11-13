@@ -1,16 +1,22 @@
 
 
-<ul>
+<div class="wallet-summary">
   <% for wallet in @wallet%>
-    <li><%=wallet.wallet_name%>
+    <%=wallet.wallet_name%>
+    <br>
+    <ul>
     <li>Current balance: £<%=wallet.update_cash_balance%>0</li>
     <li>Budget amount: £<%=wallet.budget_amount%>0</li>
     <li>Budget period: <%=wallet.number_of_days_in_budget%> day budget between <%=wallet.budget_start_date%> - <%=wallet.budget_end_date%></li>
-    <li><%=wallet.budget_overspend_warning%></li>
     <br>
-    <button> <a href="/wallet/<%=wallet.id%>/edit">Update budget info</a></button>
-  <%end%>
+    <br>
+    <%=wallet.budget_overspend_warning%>
+    <br>
+    <br>
 </ul>
+<button> <a href="/wallet/<%=wallet.id%>/edit">Update budget info</a></button>
+<%end%>
+</div>
 
 <h5>Transactions during current budget period:</h5>
 

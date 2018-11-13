@@ -12,9 +12,19 @@ select {
 
 button {
   font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  }
+
 }
 
+input {
+  font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
+}
 
 /* TABLE */
 table {
@@ -50,4 +60,11 @@ th, td {
 tfoot td {
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
+}
+
+
+.wallet-summary {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
 }
