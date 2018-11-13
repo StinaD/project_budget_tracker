@@ -65,7 +65,7 @@ transaction1.save
 
 transaction2 = Transaction.new({
   'transaction_type' => "Purchase",
-  'amount' => 30.00,
+  'amount' => 50.00,
   'transaction_date' => '2018-10-25',
   'merchant_id' => merchant2.id,
   'tag_id' => tag3.id,
@@ -75,7 +75,7 @@ transaction2.save
 
 transaction3 = Transaction.new({
   'transaction_type' => "Refund",
-  'amount' => 40.00,
+  'amount' => 30.00,
   'transaction_date' => '2018-11-05',
   'merchant_id' => merchant2.id,
   'tag_id' => tag3.id,
@@ -86,7 +86,7 @@ transaction3.save
 transaction4 = Transaction.new({
   'transaction_type' => "Purchase",
   'amount' => 150.00,
-  'transaction_date' => '2018-11-05',
+  'transaction_date' => '2018-11-06',
   'merchant_id' => merchant5.id,
   'tag_id' => tag2.id,
   'wallet_id' => wallet1.id
@@ -97,7 +97,7 @@ transaction4.save
 transaction5 = Transaction.new({
   'transaction_type' => "Purchase",
   'amount' => 150.00,
-  'transaction_date' => '2018-11-05',
+  'transaction_date' => '2018-11-02',
   'merchant_id' => merchant7.id,
   'tag_id' => tag5.id,
   'wallet_id' => wallet1.id
@@ -133,3 +133,5 @@ transaction8 = Transaction.new({
   'wallet_id' => wallet1.id
   })
 transaction8.save
+
+p wallet1.budget_transactions_sort_by_merchant 

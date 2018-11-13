@@ -12,3 +12,5 @@ get '/wallet' do
   @transactions = @wallet1.budget_transactions
   erb(:"wallet/show")
 end
+
+get

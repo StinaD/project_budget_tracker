@@ -118,7 +118,69 @@ class Wallet
     return transactions
   end
 
-  
+  def budget_transactions_sort_by_date()
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    WHERE wallet.id = $1
+    ORDER by transaction_date DESC;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
+    return transactions
+  end
+
+  def budget_transactions_sort_by_type
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    WHERE wallet.id = $1
+    ORDER by transaction_type ASC;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction) }
+    return transactions
+  end
+
+  def budget_transactions_sort_by_tag
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    INNER JOIN tags
+    ON transactions.tag_id = tags.id
+    WHERE wallet.id = $1
+    ORDER by tag_name DESC;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction) }
+    return transactions
+  end
+
+  def budget_transactions_sort_by_merchant
+    sql = "SELECT transactions.*
+    FROM transactions
+    INNER JOIN wallet
+    ON transactions.wallet_id = wallet.id
+    AND transactions.transaction_date >= wallet.budget_start_date
+    AND transactions.transaction_date <= wallet.budget_end_date
+    INNER JOIN merchants
+    ON transactions.merchant_id = merchants.id
+    WHERE wallet.id = $1
+    ORDER by merchant_name DESC;"
+    values = [@id]
+    transaction_data = SqlRunner.run(sql, values)
+    transactions =  transaction_data.map { |transaction| Transaction.new(transaction) }
+    return transactions
+  end
 
   def budget_total_spend
     transactions = budget_transactions
