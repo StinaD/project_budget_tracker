@@ -15,26 +15,13 @@ get '/transactions' do
   erb(:"transactions/show")
 end
 
-get '/transactions/tag' do
-  @transactions = Transaction.sort_by_tag
-  @merchants = Merchant.all
-  @tags = Tag.all
-  erb(:"transactions/tag")
-end
-
-get '/transactions/type' do
-  @transactions = Transaction.sort_by_type
+post '/transactions/sort' do
+  @transactions = Transaction.sort_by(params['input'])
   @merchants = Merchant.all
   @tags = Tag.all
   erb(:"transactions/show")
 end
 
-get '/transactions/merchant' do
-  @transactions = Transaction.sort_by_type
-  @merchants = Merchant.all
-  @tags = Tag.all
-  erb(:"transactions/show")
-end
 
 get '/transactions/new' do
   @merchants = Merchant.all

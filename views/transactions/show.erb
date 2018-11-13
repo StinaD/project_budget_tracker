@@ -3,15 +3,19 @@
 <p><a href="/transactions/new">Add transaction</a></p>
 
 
+<form action="/transactions/sort" method="POST" id="sort-transactions">
+
 <label for="order-transactions">Sort transactions:</label>
 
-<select id="order-transactions">
+<select id="sort-transactions" form="sort-transactions" name="input">
     <option value="">--Please choose an option--</option>
-    <option value="/transactions/tag">Order by tag</option>
-    <option value="/transactions/type">Order by transaction type</option>
-    <option value="transactions/merchant">Order by merchant</option>
-    <option value="/transaction/show">Order by date (default)</option>
+    <option value="date">Order by date (default)</option>
+    <option value="tag">Order by tag</option>
+    <option value="type">Order by transaction type</option>
+    <option value="merchant">Order by merchant</option>
 </select>
+<button>Sort</button>
+</form>
 
 <br>
 <br>
