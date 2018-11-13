@@ -31,6 +31,14 @@ class Wallet
     return wallet
   end
 
+  def self.find(id)
+    sql = "SELECT * FROM wallet
+    WHERE id = $1"
+    values = [id]
+    wallet_data = SqlRunner.run(sql, values)
+    map_item(wallet_data)
+  end
+
 
   def self.map_items(wallet_data)
     return wallet_data.map { |wallet| Wallet.new(wallet)  }
@@ -79,6 +87,7 @@ class Wallet
       )
     where id = $6"
     values = [@wallet_name, @cash_balance, @budget_amount, @budget_start_date, @budget_end_date, @id]
+    p values
     SqlRunner.run( sql, values )
   end
 

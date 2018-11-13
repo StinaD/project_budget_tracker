@@ -16,6 +16,16 @@ end
 post '/wallet/sort' do
   @wallet = Wallet.all
   @wallet1 = @wallet.first
-  @transactions = @wallet1.transactions_sort_by(params['input'])
+  @transactions = @wallet1.transactions_sort_by_date_newest(params['input'])
   erb(:"wallet/show")
+end
+
+get '/wallet/:id/edit' do
+  @wallet = Wallet.find(params['id'])
+  erb(:"wallet/edit")
+end
+
+post '/wallet/:id' do
+  Wallet.new(params).update
+  redirect to '/wallet'
 end

@@ -1,0 +1,35 @@
+<h2>Update budget settings</h2>
+
+<br>
+<form method="POST" action="/wallet/<%=@wallet.id%>">
+
+<div class="form">
+  <label for="wallet_name"></label>
+  <input type="hidden" name="wallet_name" value="<%= @wallet.wallet_name%>" readonly>
+</div>
+
+<div class="form">
+  <label for="cash_balance"></label>
+  <input type="hidden" name="cash_balance" value="<%=@wallet.cash_balance%>" readonly>
+</div>
+
+<div class="form">
+  <label for="budget_amount">Budget amount:</label>
+  <input type="number" name="budget_amount" value="<%=@wallet.budget_amount%>"
+</div>
+
+<div class="form">
+  <label for="budget_start_date">Budget start date:</label>
+  <input type="date" name="budget_start_date" value="<%=@wallet.budget_start_date%>"
+</div>
+
+<div class="form">
+  <label for="budget_end_date">Budget end date:</label>
+  <input type="date" name="budget_end_date" value="<%=@wallet.budget_end_date%>">
+</div>
+
+<div class="form">
+  <input type="submit" value="Update budget"/>
+</div>
+
+</form>

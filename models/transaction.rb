@@ -107,17 +107,11 @@ class Transaction
     return result.first
   end
 
-# --------------------------------------------
-# ********************************************
+
   def self.total
-    # sql = "SELECT SUM(amount)
-    # FROM transactions;"
-    # transaction_data = SqlRunner.run(sql)
-    # map_item(transaction_data)
     transactions = self.all
     return transactions.reduce(0) { |sum, transaction| sum + transaction.amount }
   end
-
 
 
 # instance functions ---------
