@@ -1,9 +1,19 @@
 
-h1, h2, h3, h4, h5, a{
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
+
+}
+
+select {
   font-family: 'Quicksand', sans-serif;
   color: #657E7F;
 }
 
+button {
+  font-family: 'Quicksand', sans-serif;
+  color: #657E7F;
+}
 
 
 /* TABLE */
@@ -14,31 +24,6 @@ table {
   overflow-y: scroll;
   position: static;
   width: 80%;
-}
-
-label {
-  font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
-}
-
-button {
-  font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
-}
-
-select {
-  font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
-}
-
-ul {
-  font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
-}
-
-li {
-  font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
 }
 
 thead th {
@@ -59,16 +44,10 @@ th, td {
   padding: 5px;
   text-align: left;
   width: 33.3333%;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-nav {
+tfoot td {
   font-family: 'Quicksand', sans-serif;
-  color: #657E7F;
-}
-
-.container nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  font-weight: 700;
 }

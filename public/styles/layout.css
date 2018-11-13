@@ -1,0 +1,15 @@
+.column-layout {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-column {
+  padding-top: 40px;
+  padding-right: 40px;
+}
+
+.main-column {
+  padding-top: 40px;
+  padding-right: 40px;
+  flex:1;
+}

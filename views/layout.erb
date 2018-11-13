@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
 
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="/styles/forms.css">
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
 
-  </head>
+</head>
 
-  <body>
-
+<body>
     <header>
       <h1>Miss Spendalot's Budget Tracker</h1>
       <h5>The app that helps you keep track of your spending.</h5>
     </header>
 
-    <hr>
-
-    <nav class="container">
+    <main class="column-layout">
+    <nav class="nav-column">
       <div>
         <a href="/">Home</a>
       </div>
@@ -27,7 +27,7 @@
         <a href="/wallet">Your wallet</a>
       </div>
 
-      </div>
+      <div>
         <a href="/transactions">Transactions</a>
       </div>
 
@@ -36,10 +36,13 @@
       </div>
     </nav>
 
-    <hr>
 
-    <section id="content">
-    <%= yield %>
+    <section class="main-column" id="content">
+      <%= yield %>
     </section>
+
+  </main>
+
+</body>
 
 </html>
