@@ -47,7 +47,7 @@ tag8.save
 
 wallet1 = Wallet.new({
   'wallet_name' => "Your budget",
-  'budget_amount' => 1000.00,
+  'budget_amount' => 200.00,
   'budget_start_date' => '2018-11-01',
   'budget_end_date' => '2018-11-30'
   })

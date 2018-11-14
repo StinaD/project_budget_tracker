@@ -125,13 +125,14 @@ class Wallet
     warning_limit = @budget_amount / 4
     remaining = remaining_budget
     days = number_of_days_remaining
-    if remaining <= warning_limit
+    if remaining <= warning_limit && remaining > 0
       return "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
-    else
+    elsif remaining > warning_limit
       return "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0 and #{days} days left to spend or save."
+    else
+      return "You have overspent your budget. Your budget was £#{@budget_amount}0 but you have spent £#{budget_total_spend}0."
     end
   end
-
 
 
   def budget_transactions()
@@ -147,6 +148,7 @@ class Wallet
     transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
     return transactions
   end
+
 
   def budget_transactions_sort_by_date_newest()
     sql = "SELECT transactions.*
