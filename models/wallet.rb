@@ -6,12 +6,11 @@ require_relative('transaction')
 class Wallet
 
   attr_reader :id
-  attr_accessor :wallet_name, :cash_balance, :budget_amount, :budget_start_date, :budget_end_date
+  attr_accessor :wallet_name, :budget_amount, :budget_start_date, :budget_end_date
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @wallet_name = options['wallet_name']
-    @cash_balance = options['cash_balance'].to_f
     @budget_amount = options['budget_amount'].to_f
     @budget_start_date = options['budget_start_date']
     @budget_end_date = options['budget_end_date']
@@ -56,17 +55,16 @@ class Wallet
     sql = "INSERT INTO Wallet
     (
       wallet_name,
-      cash_balance,
       budget_amount,
       budget_start_date,
       budget_end_date
     )
     VALUES
     (
-      $1, $2, $3, $4, $5
+      $1, $2, $3, $4
       )
     RETURNING *"
-    values = [@wallet_name, @cash_balance, @budget_amount, @budget_start_date, @budget_end_date]
+    values = [@wallet_name, @budget_amount, @budget_start_date, @budget_end_date]
     wallet = SqlRunner.run(sql, values)
     @id = wallet.first()['id'].to_i
   end
@@ -77,16 +75,15 @@ class Wallet
     SET
     (
       wallet_name,
-      cash_balance,
       budget_amount,
       budget_start_date,
       budget_end_date
       ) =
     (
-      $1, $2, $3, $4, $5
+      $1, $2, $3, $4
       )
-    where id = $6"
-    values = [@wallet_name, @cash_balance, @budget_amount, @budget_start_date, @budget_end_date, @id]
+    where id = $5"
+    values = [@wallet_name, @budget_amount, @budget_start_date, @budget_end_date, @id]
     p values
     SqlRunner.run( sql, values )
   end
@@ -246,19 +243,6 @@ class Wallet
     end
   end
 
-  def update_cash_balance
-    transactions = Transaction.all
-    transactions.each { |transaction|
-      if transaction.transaction_type == "Refund"
-        @cash_balance += transaction.amount
-      elsif transaction.transaction_type == "Deposit"
-        @cash_balance += transaction.amount
-      else
-        @cash_balance -= transaction.amount
-      end
-      }
-      return @cash_balance
-    end
 
   def update_budget_amount(transaction)
     type = transaction.transaction_type
@@ -267,7 +251,6 @@ class Wallet
     end_date = Date.parse(@budget_end_date)
     transaction_date = Date.parse(transaction.transaction_date)
     return unless transaction_date >= start_date && transaction_date <= end_date
-    return unless type == "Refund" || type == "Purchase"
     if type == "Purchase"
       @budget_amount -= spend
     else type == "Refund"

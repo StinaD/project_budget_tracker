@@ -16,7 +16,6 @@ CREATE TABLE tags (
 CREATE TABLE wallet (
   id SERIAL8 primary key,
   wallet_name VARCHAR(120),
-  cash_balance NUMERIC(8,2),
   budget_amount NUMERIC(8,2),
   budget_start_date DATE,
   budget_end_date DATE
@@ -27,7 +26,7 @@ CREATE TABLE transactions (
   transaction_type VARCHAR(120),
   amount NUMERIC(8,2),
   transaction_date DATE,
-  merchant_id INT8 REFERENCES merchants(id) ON DELETE CASCADE,
+  merchant_id INT8 REFERENCES merchants(id) ON DELETE SET NULL,
   tag_id INT8 REFERENCES tags(id) ON DELETE CASCADE,
   wallet_id INT8 REFERENCES wallet(id) ON DELETE CASCADE
 );

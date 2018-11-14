@@ -28,14 +28,13 @@
     <br>
     <input id="transaction-type" type="radio" value="Purchase" name="transaction_type" required>Purchase<br>
     <input id="transaction-type" type="radio" value="Refund" name="transaction_type" required>Refund<br>
-    <input id="transaction-type" type="radio" value="Deposit" name="transaction_type" required>Deposit<br>
   </div>
 
 
 
   <div class="form-row">
     <label for="amount">Amount:</label>
-    <input type="number" name="amount" required>
+    <input type="number" name="amount" min="0" required>
   </div>
 
 

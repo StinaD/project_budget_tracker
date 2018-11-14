@@ -163,7 +163,7 @@ class Transaction
   end
 
 
-  def shop_name
+  def merchant_name
     sql ="SELECT merchants.*
     FROM merchants
     INNER JOIN transactions
@@ -171,10 +171,13 @@ class Transaction
     WHERE transactions.merchant_id = $1;"
     values = [@merchant_id]
     merchant_data = SqlRunner.run( sql, values )
-
     result = merchant_data.map { |merchant| Merchant.new(merchant) }
     merchant = result.first
-    return merchant.merchant_name
+    if merchant == nil
+      return "Data required"
+    else
+      return merchant.merchant_name
+    end
   end
 
 
