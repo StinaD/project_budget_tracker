@@ -20,7 +20,7 @@
 
 
     <div class="form-row">
-      <label for="merchant_select">Select merchant:</label>
+      <label for="merchant_select">Select merchant (add <a href="/merchants/new">new</a> if not listed):</label>
       <select name="merchant_id" id="merchant_select" selected="<%= @transaction.merchant_id  %>">
         <% @merchants.each do |merchant| %>
           <% if merchant.id.to_s == @transaction.merchant_id %>
