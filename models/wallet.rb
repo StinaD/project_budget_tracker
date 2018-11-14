@@ -110,6 +110,30 @@ class Wallet
     total_days.to_i
   end
 
+  def budget_total_spend
+    transactions = budget_transactions
+    total_spend = transactions.reduce(0) { |sum, transaction| sum + transaction.amount }
+    return total_spend
+  end
+
+  def remaining_budget
+    spend = budget_total_spend
+    return @budget_amount - spend
+  end
+
+  def budget_overspend_warning
+    warning_limit = @budget_amount / 4
+    remaining = remaining_budget
+    days = number_of_days_remaining
+    if remaining <= warning_limit
+      return "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
+    else
+      return "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0 and #{days} days left to spend or save."
+    end
+  end
+
+
+
   def budget_transactions()
     sql = "SELECT transactions.*
     FROM transactions
@@ -220,44 +244,6 @@ class Wallet
     return result
   end
 
-
-  def budget_total_spend
-    transactions = budget_transactions
-    total_spend = transactions.reduce(0) { |sum, transaction| sum + transaction.amount }
-    return total_spend
-  end
-
-  def remaining_budget
-    spend = budget_total_spend
-    return @budget_amount - spend
-  end
-
-  def budget_overspend_warning
-    warning_limit = @budget_amount / 4
-    remaining = remaining_budget
-    days = number_of_days_remaining
-    if remaining <= warning_limit
-      return "Warning, you have less than a quarter of your £#{@budget_amount}0 budget remaining and #{days} days left for this budget period. It might be time to restrict your spending or reconsider your budget amount."
-    else
-      return "You have £#{remaining}0 remaining from your budget of £#{@budget_amount}0 and #{days} days left to spend or save."
-    end
-  end
-
-
-  def update_budget_amount(transaction)
-    type = transaction.transaction_type
-    spend = transaction.amount
-    start_date = Date.parse(@budget_start_date)
-    end_date = Date.parse(@budget_end_date)
-    transaction_date = Date.parse(transaction.transaction_date)
-    return unless transaction_date >= start_date && transaction_date <= end_date
-    if type == "Purchase"
-      @budget_amount -= spend
-    else type == "Refund"
-      @budget_amount += spend
-    end
-    return @budget_amount
-  end
 
 
 end

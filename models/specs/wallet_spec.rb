@@ -65,33 +65,17 @@ class WalletTest < MiniTest::Test
       'wallet_id' => @wallet1.id
       })
 
+    @transaction5 = Transaction.new({
+      'transaction_type' => "Refund",
+      'amount' => 40.00,
+      'transaction_date' => '2018-11-30',
+      'tag_id' => @tag1.id,
+      'merchant_id' => @merchant1.id,
+      'wallet_id' => @wallet1.id
+      })
+
   end
 
-
-
-  def test_update_cash_balance()
-    assert_equal(470.0, @wallet1.update_cash_balance(@transaction1))
-  end
-
-  def test_update_budget_amount__within_dates()
-    @wallet1.update_budget_amount(@transaction1)
-    assert_equal(170.0, @wallet1.budget_amount)
-  end
-
-  def test_update_budget_amount__on_start_date()
-    @wallet1.update_budget_amount(@transaction2)
-    assert_equal(160.0, @wallet1.budget_amount)
-  end
-
-  def test_update_budget_amount__outside_dates()
-    @wallet1.update_budget_amount(@transaction3)
-    assert_equal(200.0, @wallet1.budget_amount)
-  end
-
-  def test_update_budget_amount__refund()
-    @wallet2.update_budget_amount(@transaction4)
-    assert_equal(330.0, @wallet1.budget_amount)
-  end
 
   def test_days_spent()
     start_date = Date.parse(@wallet1.budget_start_date)
