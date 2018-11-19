@@ -13,7 +13,7 @@ get '/wallet' do
   erb(:"wallet/show")
 end
 
-post '/wallet/sort' do
+get '/wallet/sort' do
   @wallet = Wallet.all
   @wallet1 = @wallet.first
   @transactions = @wallet1.transactions_sort_by(params['input'])

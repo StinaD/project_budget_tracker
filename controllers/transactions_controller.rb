@@ -15,7 +15,7 @@ get '/transactions' do
   erb(:"transactions/show")
 end
 
-post '/transactions/sort' do
+get '/transactions/sort' do
   @transactions = Transaction.sort_by(params['input'])
   @merchants = Merchant.all
   @tags = Tag.all
