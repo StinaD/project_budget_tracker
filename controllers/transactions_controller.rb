@@ -4,7 +4,7 @@ require( 'pry-byebug' )
 require_relative( '../models/transaction.rb' )
 require_relative( '../models/merchant.rb' )
 require_relative( '../models/tag.rb' )
-require_relative( '../models/wallet.rb' )
+require_relative( '../models/budget.rb' )
 also_reload( '../models/*' )
 
 
@@ -26,7 +26,7 @@ end
 get '/transactions/new' do
   @merchants = Merchant.all
   @tags = Tag.all
-  @wallet = Wallet.all
+  @budget = Budget.all
   erb(:"transactions/new")
 end
 
@@ -39,7 +39,7 @@ get '/transactions/:id/edit' do
   @transaction = Transaction.find(params['id'])
   @merchants = Merchant.all
   @tags = Tag.all
-  @wallet = Wallet.all
+  @budget = Budget.all
   erb(:"transactions/edit")
 end
 

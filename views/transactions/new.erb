@@ -1,11 +1,11 @@
 <form class="form" action="/transactions" method="post">
 
   <div class="form-row">
-  <label for="wallet_select">Select wallet:</label>
-  <select id= "wallet_select" name="wallet_id" >
+  <label for="budget_select">Select budget:</label>
+  <select id= "budget_select" name="budget_id" >
 
-    <% @wallet.each do |wallet| %>
-      <option value=<%= wallet.id %>><%= wallet.wallet_name %></option>
+    <% @budget.each do |budget| %>
+      <option value=<%= budget.id %>><%= budget.budget_name %></option>
     <% end %>
   </select>
   </div>

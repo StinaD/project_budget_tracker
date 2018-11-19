@@ -1,0 +1,30 @@
+<h2>Update budget settings</h2>
+
+<br>
+<form class="form" method="POST" action="/budget/<%=@budget.id%>">
+
+<div class="form-row">
+  <label for="budget_name"></label>
+  <input type="hidden" name="budget_name" value="<%= @budget.budget_name%>" readonly>
+</div>
+
+<div class="form-row">
+  <label for="budget_amount">Budget amount:</label>
+  <input type="number" name="budget_amount" value="<%=@budget.budget_amount%>">
+</div>
+
+<div class="form-row">
+  <label for="budget_start_date">Budget start date:</label>
+  <input type="date" name="budget_start_date" value="<%=@budget.budget_start_date%>">
+</div>
+
+<div class="form-row">
+  <label for="budget_end_date">Budget end date:</label>
+  <input type="date" name="budget_end_date" value="<%=@budget.budget_end_date%>">
+</div>
+
+<div class="form-row">
+  <input type="submit" value="Update budget"/>
+</div>
+
+</form>

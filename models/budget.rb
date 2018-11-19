@@ -3,14 +3,14 @@ require( 'pry-byebug' )
 require_relative('../db/sql_runner')
 require_relative('transaction')
 
-class Wallet
+class Budget
 
   attr_reader :id
-  attr_accessor :wallet_name, :budget_amount, :budget_start_date, :budget_end_date
+  attr_accessor :budget_name, :budget_amount, :budget_start_date, :budget_end_date
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
-    @wallet_name = options['wallet_name']
+    @budget_name = options['budget_name']
     @budget_amount = options['budget_amount'].to_f
     @budget_start_date = options['budget_start_date']
     @budget_end_date = options['budget_end_date']
@@ -18,43 +18,43 @@ class Wallet
 
 # class functions ------------
   def self.delete_all
-    sql = "DELETE FROM wallet"
+    sql = "DELETE FROM budget"
     SqlRunner.run( sql )
   end
 
 
   def self.all
-    sql = "SELECT * FROM wallet"
-    wallet_data = SqlRunner.run(sql)
-    wallet = map_items(wallet_data)
-    return wallet
+    sql = "SELECT * FROM budget"
+    budget_data = SqlRunner.run(sql)
+    budget = map_items(budget_data)
+    return budget
   end
 
   def self.find(id)
-    sql = "SELECT * FROM wallet
+    sql = "SELECT * FROM budget
     WHERE id = $1"
     values = [id]
-    wallet_data = SqlRunner.run(sql, values)
-    map_item(wallet_data)
+    budget_data = SqlRunner.run(sql, values)
+    map_item(budget_data)
   end
 
 
-  def self.map_items(wallet_data)
-    return wallet_data.map { |wallet| Wallet.new(wallet)  }
+  def self.map_items(budget_data)
+    return budget_data.map { |budget| Budget.new(budget)  }
   end
 
 
-  def self.map_item(wallet_data)
-    result = Wallet.map_items(wallet_data)
+  def self.map_item(budget_data)
+    result = Budget.map_items(budget_data)
     return result.first
   end
 
 # instance functions ---------
 
   def save()
-    sql = "INSERT INTO Wallet
+    sql = "INSERT INTO budget
     (
-      wallet_name,
+      budget_name,
       budget_amount,
       budget_start_date,
       budget_end_date
@@ -64,17 +64,17 @@ class Wallet
       $1, $2, $3, $4
       )
     RETURNING *"
-    values = [@wallet_name, @budget_amount, @budget_start_date, @budget_end_date]
-    wallet = SqlRunner.run(sql, values)
-    @id = wallet.first()['id'].to_i
+    values = [@budget_name, @budget_amount, @budget_start_date, @budget_end_date]
+    budget = SqlRunner.run(sql, values)
+    @id = budget.first()['id'].to_i
   end
 
 
   def update()
-    sql = "UPDATE wallet
+    sql = "UPDATE budget
     SET
     (
-      wallet_name,
+      budget_name,
       budget_amount,
       budget_start_date,
       budget_end_date
@@ -83,7 +83,7 @@ class Wallet
       $1, $2, $3, $4
       )
     where id = $5"
-    values = [@wallet_name, @budget_amount, @budget_start_date, @budget_end_date, @id]
+    values = [@budget_name, @budget_amount, @budget_start_date, @budget_end_date, @id]
     p values
     SqlRunner.run( sql, values )
   end
@@ -138,11 +138,11 @@ class Wallet
   def budget_transactions()
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
-    WHERE wallet.id = $1;"
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
+    WHERE budget.id = $1;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
     transactions =  transaction_data.map { |transaction| Transaction.new(transaction)  }
@@ -153,11 +153,11 @@ class Wallet
   def budget_transactions_sort_by_date_newest()
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
-    WHERE wallet.id = $1
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
+    WHERE budget.id = $1
     ORDER by transaction_date DESC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
@@ -168,11 +168,11 @@ class Wallet
   def budget_transactions_sort_by_date_oldest()
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
-    WHERE wallet.id = $1
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
+    WHERE budget.id = $1
     ORDER by transaction_date ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
@@ -183,11 +183,11 @@ class Wallet
   def budget_transactions_sort_by_type
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
-    WHERE wallet.id = $1
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
+    WHERE budget.id = $1
     ORDER by transaction_type ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
@@ -198,13 +198,13 @@ class Wallet
   def budget_transactions_sort_by_tag
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
     INNER JOIN tags
     ON transactions.tag_id = tags.id
-    WHERE wallet.id = $1
+    WHERE budget.id = $1
     ORDER by tag_name ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)
@@ -215,13 +215,13 @@ class Wallet
   def budget_transactions_sort_by_merchant
     sql = "SELECT transactions.*
     FROM transactions
-    INNER JOIN wallet
-    ON transactions.wallet_id = wallet.id
-    AND transactions.transaction_date >= wallet.budget_start_date
-    AND transactions.transaction_date <= wallet.budget_end_date
+    INNER JOIN budget
+    ON transactions.budget_id = budget.id
+    AND transactions.transaction_date >= budget.budget_start_date
+    AND transactions.transaction_date <= budget.budget_end_date
     INNER JOIN merchants
     ON transactions.merchant_id = merchants.id
-    WHERE wallet.id = $1
+    WHERE budget.id = $1
     ORDER by merchant_name ASC;"
     values = [@id]
     transaction_data = SqlRunner.run(sql, values)

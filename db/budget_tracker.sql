@@ -1,7 +1,7 @@
 DROP TABLE transactions;
 DROP TABLE merchants;
 DROP TABLE tags;
-DROP TABLE wallet;
+DROP TABLE budget;
 
 CREATE TABLE merchants (
   id SERIAL8 primary key,
@@ -13,9 +13,9 @@ CREATE TABLE tags (
   tag_name VARCHAR(120)
 );
 
-CREATE TABLE wallet (
+CREATE TABLE budget (
   id SERIAL8 primary key,
-  wallet_name VARCHAR(120),
+  budget_name VARCHAR(120),
   budget_amount NUMERIC(8,2),
   budget_start_date DATE,
   budget_end_date DATE
@@ -28,5 +28,5 @@ CREATE TABLE transactions (
   transaction_date DATE,
   merchant_id INT8 REFERENCES merchants(id) ON DELETE SET NULL,
   tag_id INT8 REFERENCES tags(id) ON DELETE CASCADE,
-  wallet_id INT8 REFERENCES wallet(id) ON DELETE CASCADE
+  budget_id INT8 REFERENCES budget(id) ON DELETE CASCADE
 );

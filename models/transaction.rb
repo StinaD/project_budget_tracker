@@ -2,12 +2,12 @@ require( 'pry-byebug' )
 require_relative('../db/sql_runner')
 require_relative('tag')
 require_relative('merchant')
-require_relative('wallet')
+require_relative('budget')
 
 class Transaction
 
   attr_reader :id
-  attr_accessor :transaction_type, :amount, :transaction_date, :tag_id, :merchant_id, :wallet_id
+  attr_accessor :transaction_type, :amount, :transaction_date, :tag_id, :merchant_id, :budget_id
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
@@ -16,7 +16,7 @@ class Transaction
     @transaction_date = options['transaction_date']
     @merchant_id = options['merchant_id']
     @tag_id = options['tag_id']
-    @wallet_id = options['wallet_id']
+    @budget_id = options['budget_id']
   end
 
 
@@ -123,14 +123,14 @@ class Transaction
       transaction_date,
       tag_id,
       merchant_id,
-      wallet_id
+      budget_id
     )
     VALUES
     (
       $1, $2, $3, $4, $5, $6
     )
     RETURNING *;"
-    values = [@transaction_type, @amount, @transaction_date, @tag_id, @merchant_id, @wallet_id]
+    values = [@transaction_type, @amount, @transaction_date, @tag_id, @merchant_id, @budget_id]
     transaction = SqlRunner.run(sql, values)
     @id = transaction.first()['id'].to_i
   end
@@ -144,13 +144,13 @@ class Transaction
       transaction_date,
       tag_id,
       merchant_id,
-      wallet_id
+      budget_id
     ) =
     (
       $1, $2, $3, $4, $5, $6
     )
     WHERE id = $7"
-    values = [@transaction_type, @amount, @transaction_date, @tag_id, @merchant_id, @wallet_id, @id]
+    values = [@transaction_type, @amount, @transaction_date, @tag_id, @merchant_id, @budget_id, @id]
     SqlRunner.run( sql, values )
   end
 

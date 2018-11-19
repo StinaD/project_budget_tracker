@@ -1,24 +1,24 @@
 
 
-<div class="wallet-summary">
-  <% for wallet in @wallet%>
-    <h3><%=wallet.wallet_name%></h3>
+<div class="budget-summary">
+  <% for budget in @budget%>
+    <h3><%=budget.budget_name%></h3>
     <ul>
-    <li>Budget: £<%=wallet.budget_amount%>0</li>
-    <li>Remaining: £<%=wallet.remaining_budget%>0</li>
-    <li>Budget period: <%=wallet.number_of_days_in_budget%> day budget between <%=wallet.budget_start_date%> - <%=wallet.budget_end_date%></li>
+    <li>Budget: £<%=budget.budget_amount%>0</li>
+    <li>Remaining: £<%=budget.remaining_budget%>0</li>
+    <li>Budget period: <%=budget.number_of_days_in_budget%> day budget between <%=budget.budget_start_date%> - <%=budget.budget_end_date%></li>
     <br>
-    <%=wallet.budget_overspend_warning%>
+    <%=budget.budget_overspend_warning%>
     <br>
     <br>
 </ul>
-<button> <a href="/wallet/<%=wallet.id%>/edit">Update budget info</a></button>
+<button> <a href="/budget/<%=budget.id%>/edit">Update budget info</a></button>
 <%end%>
 </div>
 
 <h5>Transactions during current budget period:</h5>
 
-<form action="/wallet/sort" method="GET" id="sort-transactions">
+<form action="/budget/sort" method="GET" id="sort-transactions">
 
 <label for="order-transactions">Sort transactions:</label>
 
@@ -36,7 +36,7 @@
 <br>
 <br>
 
-<table class="wallet-table">
+<table class="budget-table">
   <thead>
     <th scope ="col">Date</th>
     <th scope ="col">Merchant</th>
@@ -62,6 +62,6 @@
   <tfoot>
     <tr>
       <td colspan="3">Total</td>
-      <td colspan="3">£<%=@wallet1.budget_total_spend%>0</td>
+      <td colspan="3">£<%=@budget1.budget_total_spend%>0</td>
   </tfoot>
 </table>

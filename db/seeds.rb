@@ -2,12 +2,12 @@ require( 'pry-byebug' )
 require_relative('../models/merchant')
 require_relative('../models/tag')
 require_relative('../models/transaction')
-require_relative('../models/wallet')
+require_relative('../models/budget')
 
 
 Merchant.delete_all
 Tag.delete_all
-Wallet.delete_all
+Budget.delete_all
 Transaction.delete_all
 
 merchant1 = Merchant.new({'merchant_name' => 'Prada'})
@@ -49,13 +49,13 @@ tag7.save
 tag8.save
 tag9.save
 
-wallet1 = Wallet.new({
-  'wallet_name' => "Your budget",
+budget1 = Budget.new({
+  'budget_name' => "Your budget",
   'budget_amount' => 500.00,
   'budget_start_date' => '2018-11-01',
   'budget_end_date' => '2018-11-30'
   })
-wallet1.save
+budget1.save
 
 transaction1 = Transaction.new({
   'transaction_type' => "Purchase",
@@ -63,7 +63,7 @@ transaction1 = Transaction.new({
   'transaction_date' => '2018-11-08',
   'merchant_id' => merchant1.id,
   'tag_id' => tag1.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction1.save
 
@@ -73,7 +73,7 @@ transaction2 = Transaction.new({
   'transaction_date' => '2018-10-25',
   'merchant_id' => merchant2.id,
   'tag_id' => tag3.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction2.save
 
@@ -83,7 +83,7 @@ transaction3 = Transaction.new({
   'transaction_date' => '2018-11-05',
   'merchant_id' => merchant2.id,
   'tag_id' => tag3.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction3.save
 
@@ -93,7 +93,7 @@ transaction4 = Transaction.new({
   'transaction_date' => '2018-11-06',
   'merchant_id' => merchant5.id,
   'tag_id' => tag2.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction4.save
 
@@ -104,7 +104,7 @@ transaction5 = Transaction.new({
   'transaction_date' => '2018-11-02',
   'merchant_id' => merchant7.id,
   'tag_id' => tag5.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction5.save
 
@@ -114,7 +114,7 @@ transaction6 = Transaction.new({
   'transaction_date' => '2018-10-15',
   'merchant_id' => merchant3.id,
   'tag_id' => tag4.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction6.save
 
@@ -124,7 +124,7 @@ transaction7 = Transaction.new({
   'transaction_date' => '2018-10-21',
   'merchant_id' => merchant4.id,
   'tag_id' => tag4.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction7.save
 
@@ -134,6 +134,6 @@ transaction8 = Transaction.new({
   'transaction_date' => '2018-10-29',
   'merchant_id' => merchant8.id,
   'tag_id' => tag8.id,
-  'wallet_id' => wallet1.id
+  'budget_id' => budget1.id
   })
 transaction7.save
