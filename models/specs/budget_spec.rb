@@ -1,4 +1,5 @@
 require("minitest/autorun")
+require('minitest/rg')
 require('date')
 require_relative("../budget")
 require_relative("../merchant")
